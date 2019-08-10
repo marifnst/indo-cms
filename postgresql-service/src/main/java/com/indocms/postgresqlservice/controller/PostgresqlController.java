@@ -1,5 +1,7 @@
 package com.indocms.postgresqlservice.controller;
 
+import java.util.List;
+
 import com.indocms.postgresqlservice.model.Response;
 import com.indocms.postgresqlservice.service.GeneralService;
 import com.indocms.postgresqlservice.service.PostgresqlService;
@@ -26,7 +28,8 @@ public class PostgresqlController {
         Document data = new Document();
         
         try {
-            data = postgresqlService.getData(module, templateCode);
+            List<Document> dataDocument = postgresqlService.getData(module, templateCode);
+            data.append("rdbms_data", dataDocument);
             meta = generalService.getHttpStatusCode("200");
         } catch (Exception e) {            
             e.printStackTrace();

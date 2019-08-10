@@ -39,9 +39,8 @@ public class PostgresqlService {
 
     private Document templateHeader = new Document();
 
-    public Document getData(String module, String templateCode) throws Exception {
-        Document output = new Document();
-        List<Document> rows = new ArrayList<>();
+    public List<Document> getData(String module, String templateCode) throws Exception {
+        List<Document> output= new ArrayList<>();
 
         Connection connection = null;
         try {
@@ -63,9 +62,8 @@ public class PostgresqlService {
                     Object columnValue = resultSet.getObject(i);
                     row.append(columnName, columnValue);
                 }          
-                rows.add(row);
+                output.add(row);
             }
-            output.put("data", rows);
         } finally {
             try {
                 if (connection != null) {

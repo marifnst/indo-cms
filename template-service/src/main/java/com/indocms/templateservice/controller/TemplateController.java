@@ -20,7 +20,7 @@ public class TemplateController {
     @Autowired
     private GeneralService generalService;
 
-    @RequestMapping(value ="/template/init/{module}/{templateCode}", method = RequestMethod.GET)
+    @RequestMapping(value ="/template/init/{module}/{templateCode}", method = RequestMethod.POST)
     public Response getTemplate(@PathVariable String module, @PathVariable String templateCode) {
         Response response = null;
         Document meta = new Document();

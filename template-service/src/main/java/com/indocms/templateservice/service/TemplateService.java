@@ -22,17 +22,14 @@ public class TemplateService {
     private Document templateHeader = new Document();
 
     public Document getTemplateData(String module, String templateCode) throws Exception {
-        Document output = new Document();
-
-        templateHeader = this.getTemplateHeader(module, templateCode);
-        output = (Document) templateHeader.get("payload");
-        return output;
+        templateHeader = this.getTemplateHeader(module, templateCode);        
+        return templateHeader;
     }
 
     public Document getTemplateHeader(String module, String templateCode) throws Exception {
         Document output = null;
         Document filter = new Document("module", module).append("template_code", templateCode);
-        Document projection = new Document("_id", 0).append("payload", 1);
+        Document projection = new Document("_id", 0);
         List<Document> tmpOutput = mongoService.find(mainDatabase, templateHeaderCollection, filter, null, projection);
         if (tmpOutput.size() > 0) {
             output = tmpOutput.get(0);
