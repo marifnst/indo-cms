@@ -16,11 +16,13 @@ public class GatewayServiceApplication {
 	@Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
-			.route(p -> p
-				.path("/template/**")
+			.route(p -> p				
+				.path("/api/template/**")
+				.filters(f -> f.stripPrefix(1))
 				.uri("http://localhost:8081/template/**"))
 			.route(p -> p
-				.path("/postgresql/**")
+				.path("/api/postgresql/**")
+				.filters(f -> f.stripPrefix(1))
 				.uri("http://localhost:8082/postgresql/**"))
             .build();
     }
