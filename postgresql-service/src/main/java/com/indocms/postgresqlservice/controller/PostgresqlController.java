@@ -118,15 +118,7 @@ public class PostgresqlController {
         Document data = new Document();
         
         try {
-            requestBody = requestBody == null ? "{}" : requestBody;    
-            // URI dataFlowUri = new URI("http://localhost:9393");
-            // DataFlowTemplate dataFlowTemplate = new DataFlowTemplate(dataFlowUri);
-            // Map<String, String> properties = new HashMap<>();
-            // List<String> arguments = new ArrayList<>();
-            // arguments.add("--export_id=5d525575ca5bf47440f1b035");
-            // long taskLauncherOutput = dataFlowTemplate.taskOperations().launch("export-csv-task", properties, arguments, null);
-            // System.out.println("taskLauncherOutput : " + taskLauncherOutput);
-
+            requestBody = requestBody == null ? "{}" : requestBody;
             data = dataFlowService.exportTaskExecution(exportType, module, templateCode, requestBody);
             meta = generalService.getHttpStatusCode("200");
         } catch (Exception e) {            

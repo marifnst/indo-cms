@@ -39,4 +39,18 @@ public class MongoService {
         }        
         return output;
     }
+
+    public void insertOneDocument(String databaseName, String collectionName, Document document) throws Exception {
+        try {
+            // System.out.println("mongoDBUri : " + mongoDBUri);
+            MongoClientURI mongoClientURI = new MongoClientURI(mongoDBUri);        
+            mongoClient = new MongoClient(mongoClientURI);
+            MongoDatabase mongoDatabase = mongoClient.getDatabase(databaseName);
+            MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(collectionName);
+    
+            mongoCollection.insertOne(document);
+        } finally {
+            mongoClient.close();
+        }
+    }
 }

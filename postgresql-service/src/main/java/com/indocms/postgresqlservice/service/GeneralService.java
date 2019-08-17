@@ -1,5 +1,7 @@
 package com.indocms.postgresqlservice.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
@@ -19,6 +21,8 @@ public class GeneralService {
     @Autowired
     private MongoService mongoService;
 
+    private SimpleDateFormat simpleDateFormat = null;
+
     public Document getHttpStatusCode(String code) {
         Document output = new Document();
         try {
@@ -31,6 +35,13 @@ public class GeneralService {
             output.put("code", "400");
             output.put("message", "Bad Request, HTTP Status Code Not Found");
         }
+        return output;
+    }
+
+    public String convertDateToString(String datePattern, Date date) {
+        String output = null;
+        simpleDateFormat = new SimpleDateFormat(datePattern);
+        output = simpleDateFormat.format(date);
         return output;
     }
 }
